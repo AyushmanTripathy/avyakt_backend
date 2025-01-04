@@ -5,17 +5,15 @@
   "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx tsc",
-    "start": "npm run build & node dist/server.js",
+    "build": "npx tsc && cp -r src/admin/views dist/admin/views && cp -r src/admin/public dist/admin/public",
+    "start": "npm run build && node dist/server.js",
     "dev": "ts-node dist/src/server.js"
   },
-  "keywords": [
-    "avyakt",
-    "backend"
-  ],
+  "keywords": ["avyakt","backend"],
   "author": "Vishnu Prasad Korada & Ayushman Tripathy",
   "license": "MIT",
   "dependencies": {
+    "ejs": "^3.1.10",
     "express": "^4.21.2",
     "mongoose": "^8.9.3"
   },

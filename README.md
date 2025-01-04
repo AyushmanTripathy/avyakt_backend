@@ -9,17 +9,14 @@ The collections for the database are:
 4. Cultural & Sports Events
 5. User (optional)
 
-
-
-
 ## Tasks to do:
 
 - [x]  Setup the backend project structure
-- [ ]  Create the schemas for ```/api``` endpoint
-- [ ]  Create controllers and middlewares for ```/api``` enpoint
+- [x]  Create the schemas for ```/api``` endpoint
+- [x]  Create controllers and middlewares for ```/api``` enpoint
 - [ ]  make the ```/admin``` admin panel and add all the functionalites for the dashboard like updating status, FCM messaging 
 - [ ]  add the mailing function and CTA for admin panel
-
+- [ ]  notification system
 
 ---
 

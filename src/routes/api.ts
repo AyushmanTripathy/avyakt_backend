@@ -15,6 +15,17 @@ router.use((req, res, next) => {
 router.post("/register", async (req, res) => {
   try {
     const body = req.body;
+
+    const event = await Event.findById(body.eventId, "memberCount");
+    if (!event) {
+      res.status(404).send("eventId not found");
+      return;
+    }
+    if (event.memberCount != body.mails.length) {
+      res.status(400).send("memberCount doesn't match mails length");
+      return;
+    }
+
     const reg = new Registration({
       name: body.name,
       mails: body.mails,

@@ -1,0 +1,25 @@
+<h2> <%= event.name %> </h2>
+<table>
+  <thead>
+    <tr>
+      <td> Name </td>
+      <td> Phone no </td>
+      <td> UPI ID </td>
+      <% for (let i = 1; i <= event.memberCount; i++) { %>
+        <td> mail <%= i %> </td>
+      <% } %>
+    </tr>
+  </thead>
+  <tbody>
+  <% registrations.forEach((x) => { %>
+    <tr>
+      <td> <%= x.name %> </td>
+      <td> <%= x.phoneno %> </td>
+      <td> <%= x.upiId %> </td>
+      <% x.mails.forEach((mail) => { %>
+        <td> <%= mail %> </td>
+      <% }); %>
+    </tr>
+  <% }); %>
+  </tbody>
+</table>

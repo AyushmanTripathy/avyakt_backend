@@ -1,5 +1,6 @@
 import { Router } from "express";
 import Event from "../../model/Event";
+import Registration from "../../model/Registration";
 
 const router = Router();
 
@@ -77,6 +78,18 @@ router.post("/update", async (req, res) => {
     res.status(400).render("admin/event/update", {
       message: "Operation Failed",
     });
+  }
+});
+
+router.get("/registrations/:id", async (req, res) => {
+  try {
+    const event = await Event.findById(req.params.id, "name memberCount");
+    const registrations = await Registration.find({
+      eventId: req.params.id,
+    }, "phoneno upiId mails name").exec();
+    res.render("admin/event/registrations", { event, registrations });
+  } catch (e) {
+    res.status(404).send("id not found");
   }
 });
 

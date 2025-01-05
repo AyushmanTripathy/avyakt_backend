@@ -20,7 +20,7 @@ The collections for the database are:
 [ ] /admin/event
 [x] /admin/event/add
 [x] /admin/event/update/:id
-[ ] /admin/event/registrations/:id
+[x] /admin/event/registrations/:id
 ```
 
 - [ ]  `/admin` styling

@@ -12,7 +12,8 @@ if (!CLIENT_KEY) {
 const router = Router();
 
 router.use((req, res, next) => {
-  if (req.headers.authorization != CLIENT_KEY) res.sendStatus(401);
+  if (req.headers.authorization != CLIENT_KEY) 
+    res.status(401).send("CLIENT_KEY required in authorization header");
   else next();
 });
 

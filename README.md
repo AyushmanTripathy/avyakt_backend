@@ -12,9 +12,19 @@ The collections for the database are:
 ## Tasks to do:
 
 - [x]  Setup the backend project structure
-- [x]  Create the schemas for ```/api``` endpoint
-- [x]  Create controllers and middlewares for ```/api``` enpoint
-- [ ]  make the ```/admin``` admin panel and add all the functionalites for the dashboard like updating status, FCM messaging 
+- [x]  Create the schemas for `/api` endpoint
+- [x]  Create controllers and middlewares for `/api` enpoint
+- [ ]  make the `/admin` admin panel functionalites for the dashboard
+
+```
+[ ] /admin/event
+[x] /admin/event/add
+[x] /admin/event/update/:id
+[ ] /admin/event/registrations/:id
+```
+
+- [ ]  `/admin` styling
+- [ ]  FCM messaging
 - [ ]  add the mailing function and CTA for admin panel
 - [ ]  notification system
 

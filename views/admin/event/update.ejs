@@ -1,33 +1,35 @@
 <form action="/admin/event/update" method="post">
+  <input type="text" hidden name="id" value="<%= event._id %>">
   <label for="name"> Event Name </label>
-  <input name="name" type="text" required>
+  <input name="name" type="text" value="<%= event.name %>" required>
   <label for="dateTime"> Date & Time </label>
-  <input name="dateTime" type="datetime" required>
+  <input name="dateTime" type="datetime-local" value="<%= event.dateTime.toISOString().split(".")[0] %>" required>
   <label for="memberCount"> Member Count </label>
-  <input name="memberCount" type="number" min="1" max="20" required>
+  <input name="memberCount" type="number" value="<%= event.memberCount %>" min="1" max="20" required>
   <label for="status"> Status </label>
-  <select id="status" name="status" required>
+  <select id="status" name="status" data-select="<%= event.status %>" required>
     <option value="UPCOMING"> UPCOMING </option>
     <option value="ONGOING"> ONGOING </option>
     <option value="CLOSED"> CLOSED </option>
   </select>
   <label for="fee"> Fee </label>
-  <input name="fee" type="number" required>
+  <input name="fee" type="number" value="<%= event.fee %>" required>
   <label for="rules"> Rules </label>
-  <textarea id="rules" name="rules" cols="30" rows="10"></textarea>
+  <textarea id="rules" name="rules" cols="30" rows="10"><%= event.rules.join("\r\n") %></textarea>
   <label for="category"> Category </label>
-  <select id="category" name="category" required>
+  <select id="category" data-select="<%= event.category %>" name="category" required>
     <option value="TECH"> TECH </option>
     <option value="NONTECH"> NONTECH </option>
     <option value="CULTURAL"> CULTURAL </option>
   </select>
   <label for="gender"> For </label>
-  <select id="gender" name="gender" required>
+  <select id="gender" name="gender" data-select="<%= event.gender %>" required>
     <option value="ALL"> ALL </option>
     <option value="BOYS"> BOYS </option>
     <option value="GIRLS"> GIRLS </option>
   </select>
+  <%- include("../../admin/fileUpload") %>
   <label for="imageURL"> Image URL </label>
-  <input name="imageURL" type="url" required>
+  <input name="imageURL" type="url" value="<%= event.imageURL %>" required>
   <button type="submit"> Update Event </button>
 </form>

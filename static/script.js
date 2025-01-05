@@ -26,3 +26,11 @@ if (fileUploadBtn && fileUploadInput && fileUploadTarget) {
     fileUploadTarget.value = "https://placehold.co/600x600?text=Event+Pic";
   };
 }
+
+//Update options with selected attribute
+document.querySelectorAll("select").forEach((x) => {
+  const value = x.getAttribute("data-select");
+  const option = document.querySelector(`option[value='${value}']`);
+  if (option) option.selected = true;
+  else console.log("option not found", x.value);
+});

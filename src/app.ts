@@ -1,4 +1,5 @@
 import express from "express";
+import indexRouter from "./routes/index";
 import apiRouter from "./routes/api";
 import adminRouter from "./routes/admin";
 import { join } from "path";
@@ -11,11 +12,13 @@ app.set("view engine", "ejs");
 
 app.use(expressLayouts)
 app.use("/static", express.static(join(__dirname, '../static')));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", apiRouter);
 app.use("/admin", adminRouter);
+app.use("/", indexRouter);
 
 app.use((req, res, next) => {
   try {

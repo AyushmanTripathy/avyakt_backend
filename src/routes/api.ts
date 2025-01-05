@@ -2,12 +2,7 @@ import { Router } from "express";
 import Event from "../model/Event";
 import User from "../model/User";
 import Registration from "../model/Registration";
-
-const CLIENT_KEY = process.env.CLIENT_KEY;
-if (!CLIENT_KEY) {
-  console.error("CLIENT_KEY not present");
-  process.exit(1);
-}
+import { CLIENT_KEY } from "../lib/keys";
 
 const router = Router();
 

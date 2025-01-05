@@ -12,7 +12,7 @@ if (!CLIENT_KEY) {
 const router = Router();
 
 router.use((req, res, next) => {
-  if (req.headers.authorization != CLIENT_KEY) 
+  if (req.headers.authorization != CLIENT_KEY)
     res.status(401).send("CLIENT_KEY required in authorization header");
   else next();
 });
@@ -29,7 +29,7 @@ router.post("/register", async (req, res) => {
         }
         user.registrations.push(body.eventId);
       } else user = new User({ mail, registrations: [body.eventId] });
-      user.save();
+      await user.save();
     }
 
     const reg = new Registration({
@@ -39,11 +39,11 @@ router.post("/register", async (req, res) => {
       phoneno: body.phoneno,
     });
     if (body.upiId) reg.upiId = body.upiId;
-    reg.save();
+    await reg.save();
+    res.sendStatus(200);
   } catch {
     res.status(400).send("validation failed");
   }
-  res.sendStatus(200);
 });
 
 router.get("/events/user/:mail", async (req, res) => {

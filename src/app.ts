@@ -17,4 +17,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", apiRouter);
 app.use("/admin", adminRouter);
 
+app.use((req, res, next) => {
+  try {
+    next();
+  } catch(e) {
+    console.error(e);
+    res.status(500).send("Contact the devs")
+  }
+})
+
 export default app;

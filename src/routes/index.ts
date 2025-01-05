@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { ADMIN_KEY } from "../lib/keys";
+import { ADMIN_KEY, validateKey } from "../lib/keys";
 
 const router = Router();
 
 router.get("/", (req, res) => {
-  res.render("login");
+  if (validateKey(req)) res.redirect("/admin");
+  else res.render("login");
 });
 
 router.post("/validate", (req, res) => {

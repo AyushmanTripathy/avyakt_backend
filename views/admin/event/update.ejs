@@ -1,0 +1,33 @@
+<form action="/admin/event/update" method="post">
+  <label for="name"> Event Name </label>
+  <input name="name" type="text" required>
+  <label for="dateTime"> Date & Time </label>
+  <input name="dateTime" type="datetime" required>
+  <label for="memberCount"> Member Count </label>
+  <input name="memberCount" type="number" min="1" max="20" required>
+  <label for="status"> Status </label>
+  <select id="status" name="status" required>
+    <option value="UPCOMING"> UPCOMING </option>
+    <option value="ONGOING"> ONGOING </option>
+    <option value="CLOSED"> CLOSED </option>
+  </select>
+  <label for="fee"> Fee </label>
+  <input name="fee" type="number" required>
+  <label for="rules"> Rules </label>
+  <textarea id="rules" name="rules" cols="30" rows="10"></textarea>
+  <label for="category"> Category </label>
+  <select id="category" name="category" required>
+    <option value="TECH"> TECH </option>
+    <option value="NONTECH"> NONTECH </option>
+    <option value="CULTURAL"> CULTURAL </option>
+  </select>
+  <label for="gender"> For </label>
+  <select id="gender" name="gender" required>
+    <option value="ALL"> ALL </option>
+    <option value="BOYS"> BOYS </option>
+    <option value="GIRLS"> GIRLS </option>
+  </select>
+  <label for="imageURL"> Image URL </label>
+  <input name="imageURL" type="url" required>
+  <button type="submit"> Update Event </button>
+</form>

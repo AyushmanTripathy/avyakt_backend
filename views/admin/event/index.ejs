@@ -1,0 +1,7 @@
+<a href="/admin/event/add"> Add new event </a>
+<% events.forEach(function(event) { %>
+<div>
+  <h3> <%= event.name %> </h3>
+  <a href=<%= "/admin/event/update/" + event._id %>> update </a>
+</div>
+<% }); %>

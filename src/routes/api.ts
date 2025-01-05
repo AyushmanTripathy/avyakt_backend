@@ -15,6 +15,14 @@ router.use((req, res, next) => {
 router.post("/register", async (req, res) => {
   try {
     const body = req.body;
+    const reg = new Registration({
+      name: body.name,
+      mails: body.mails,
+      eventId: body.eventId,
+      phoneno: body.phoneno,
+    });
+    await reg.save();
+
     for (const mail of body.mails) {
       let user = await User.findOne({ mail });
       if (user) {
@@ -27,14 +35,7 @@ router.post("/register", async (req, res) => {
       await user.save();
     }
 
-    const reg = new Registration({
-      name: body.name,
-      mails: body.mails,
-      eventId: body.eventId,
-      phoneno: body.phoneno,
-    });
     if (body.upiId) reg.upiId = body.upiId;
-    await reg.save();
     res.sendStatus(200);
   } catch {
     res.status(400).send("validation failed");

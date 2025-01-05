@@ -16,13 +16,17 @@ router.post("/register", async (req, res) => {
   try {
     const body = req.body;
 
-    const event = await Event.findById(body.eventId, "memberCount");
+    const event = await Event.findById(body.eventId, "fee memberCount");
     if (!event) {
       res.status(404).send("eventId not found");
       return;
     }
     if (event.memberCount != body.mails.length) {
       res.status(400).send("memberCount doesn't match mails length");
+      return;
+    }
+    if (event.fee != 0 && !body.upiId) {
+      res.status(403).send("UPI Id is required as event has fee of " + event.fee);
       return;
     }
 

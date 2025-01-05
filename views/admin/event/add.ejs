@@ -19,19 +19,20 @@
   <textarea id="rules" name="rules" cols="30" rows="10"></textarea>
   <label for="category"> Category </label>
   <select id="category" name="category" required>
-    <option value="TECH"> TECH </option>
+    <option value="TECH" selected> TECH </option>
     <option value="NONTECH"> NONTECH </option>
     <option value="CULTURAL"> CULTURAL </option>
   </select>
   <label for="gender"> For </label>
   <select id="gender" name="gender" required>
-    <option value="ALL"> ALL </option>
+    <option value="ALL" selected> ALL </option>
     <option value="BOYS"> BOYS </option>
     <option value="GIRLS"> GIRLS </option>
   </select>
-  <label for="imageURL"> Image URL </label>
-  <input name="imageURL" type="url" required>
+  <label for="imageURL"> Upload Image </label>
+  <%- include("../fileUpload") %>
+  <label for="imageURL"> Or Manually Add Image URL </label>
+  <input id="fileUploadTarget" name="imageURL" type="url" required>
   <button type="submit"> Add Event </button>
 </form>
-
 

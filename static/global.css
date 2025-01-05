@@ -2,3 +2,11 @@ form {
   display: flex;
   flex-direction: column;
 }
+
+#fileUploadForm {
+  display: none;
+}
+
+.formVisibile {
+  display: flex;
+}

@@ -30,9 +30,7 @@ router.post("/add", async (req, res) => {
       imageURL: body.imageURL,
     });
     await event.save();
-    res.status(200).render("admin/event/add", {
-      message: "Event Added Successfully",
-    });
+    res.status(200).redirect("/admin/event");
   } catch (e) {
     res.status(400).render("admin/event/add", {
       message: "Operation Failed",

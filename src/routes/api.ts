@@ -3,6 +3,7 @@ import Event from "../model/Event";
 import User from "../model/User";
 import Registration from "../model/Registration";
 import { CLIENT_KEY } from "../lib/keys";
+import { validateEmail } from "../lib/utils";
 
 const router = Router();
 
@@ -43,7 +44,16 @@ router.post("/register", async (req, res) => {
     });
 
     const users = [];
-    for (const mail of body.mails) {
+    for (let i = 0; i < body.mails.length; i++) {
+      const mail = body.mails[i];
+      if (!validateEmail(mail)) {
+        res.status(400).send(mail + " is invalid mail");
+        return;
+      }
+      if (body.mails.indexOf(mail) != i) {
+        res.status(400).send(mail + " is duplicated");
+        return;
+      }
       let user = await User.findOne({ mail });
       if (user) {
         if (user.registrations.includes(body.eventId)) {

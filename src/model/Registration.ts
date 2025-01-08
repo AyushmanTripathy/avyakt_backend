@@ -6,6 +6,8 @@ const registrationSchema = new mongoose.Schema({
   mails: { type: [String], required: true },
   eventId: { type: ObjectId, required: true },
   phoneno: { type: Number, required: true },
+  isVerified: { type: Boolean, required: true },
+  isValid: { type: Boolean },
   upiId: { type: String },
 });
 

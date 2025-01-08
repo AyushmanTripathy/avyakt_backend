@@ -11,13 +11,13 @@ app.set("view engine", "ejs");
 app.use(expressLayouts);
 app.use("/static", express.static(join(__dirname, "../static")));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   res.status(500).send("Facing a internal errro, Contact the devs");
 };
 app.use(errorHandler);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/", indexRouter);
 

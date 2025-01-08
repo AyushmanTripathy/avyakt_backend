@@ -39,6 +39,7 @@ router.post("/register", async (req, res) => {
       mails: body.mails,
       eventId: body.eventId,
       phoneno: body.phoneno,
+      isVerified: false,
     });
 
     const users = [];
@@ -55,6 +56,10 @@ router.post("/register", async (req, res) => {
     }
 
     if (body.upiId) reg.upiId = body.upiId;
+    else {
+      reg.isVerified = true;
+      reg.isValid = true;
+    }
 
     await reg.save();
     for (const user of users) await user.save();

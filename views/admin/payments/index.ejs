@@ -1,0 +1,46 @@
+<a href="/admin/payments/all"> All payments </a>
+
+<h2> Unverified Payments </h2>
+<table>
+  <thead>
+    <tr>
+      <td> Name </td>
+      <td> Phone no </td>
+      <td> UPI ID </td>
+      <td> Accept/Reject </td>
+    </tr>
+  </thead>
+  <tbody>
+  <% payments.forEach((x) => { %>
+    <tr>
+      <td> <%= x.name %> </td>
+      <td> <%= x.phoneno %> </td>
+      <td> <%= x.upiId %> </td>
+      <td id="<%= x._id %>">
+        <button onclick="verify('<%= x._id %>', true)"> 👍 </button>
+        <button onclick="verify('<%= x._id %>', false)"> 👎 </button>
+      </td>
+    </tr>
+  <% }); %>
+  </tbody>
+</table>
+
+<script>
+  async function verify(id, valid) {
+    const td = document.getElementById(id);
+    td.innerText = "Updating ... ";
+    const res = await fetch("/admin/payments/verify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+        valid
+      })
+    });
+
+    if (res.ok) td.innerText = valid ? "Accepted": "Rejected";
+    else td.innerText = "Updation failed";
+  }
+</script>

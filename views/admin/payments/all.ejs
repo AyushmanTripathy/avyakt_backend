@@ -1,0 +1,27 @@
+<h2> All Payments </h2>
+<table>
+  <thead>
+    <tr>
+      <td> Name </td>
+      <td> Phone no </td>
+      <td> UPI ID </td>
+      <td> Status </td>
+    </tr>
+  </thead>
+  <tbody>
+  <% payments.forEach((x) => { %>
+    <tr>
+      <td> <%= x.name %> </td>
+      <td> <%= x.phoneno %> </td>
+      <td> <%= x.upiId %> </td>
+      <% if(!x.isVerified) { %>
+      <td> Not Verified </td>
+      <% } else if (x.isValid) { %>
+      <td> Accepted </td>
+      <% } else { %>
+      <td> Rejected </td>
+      <% } %>
+    </tr>
+  <% }); %>
+  </tbody>
+</table>

@@ -16,7 +16,7 @@ router.post("/register", async (req, res) => {
   try {
     const body = req.body;
 
-    const event = await Event.findById(body.eventId, "fee memberCount");
+    const event = await Event.findById(body.eventId, "fee status memberCount");
     if (!event) {
       res.status(404).send("eventId not found");
       return;
@@ -29,6 +29,10 @@ router.post("/register", async (req, res) => {
       res.status(403).send("UPI Id is required as event has fee of " + event.fee);
       return;
     }
+    if (event.status != "ONGOING") {
+      res.status(403).send("Event status is not ONGOING");
+      return;
+    }
 
     const reg = new Registration({
       name: body.name,
@@ -36,8 +40,8 @@ router.post("/register", async (req, res) => {
       eventId: body.eventId,
       phoneno: body.phoneno,
     });
-    await reg.save();
 
+    const users = [];
     for (const mail of body.mails) {
       let user = await User.findOne({ mail });
       if (user) {
@@ -47,10 +51,13 @@ router.post("/register", async (req, res) => {
         }
         user.registrations.push(body.eventId);
       } else user = new User({ mail, registrations: [body.eventId] });
-      await user.save();
+      users.push(user);
     }
 
     if (body.upiId) reg.upiId = body.upiId;
+
+    await reg.save();
+    for (const user of users) await user.save();
     res.sendStatus(200);
   } catch {
     res.status(400).send("validation failed");

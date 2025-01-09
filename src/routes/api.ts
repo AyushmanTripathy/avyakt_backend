@@ -4,6 +4,7 @@ import User from "../model/User";
 import Registration from "../model/Registration";
 import { CLIENT_KEY } from "../lib/keys";
 import { validateEmail } from "../lib/utils";
+import { sendRegisteredMail } from "../lib/mailing";
 
 const router = Router();
 
@@ -17,7 +18,7 @@ router.post("/register", async (req, res) => {
   try {
     const body = req.body;
 
-    const event = await Event.findById(body.eventId, "fee status memberCount");
+    const event = await Event.findById(body.eventId, "name fee status memberCount");
     if (!event) {
       res.status(404).send("eventId not found");
       return;
@@ -74,6 +75,7 @@ router.post("/register", async (req, res) => {
     await reg.save();
     for (const user of users) await user.save();
     res.sendStatus(200);
+    sendRegisteredMail(reg.mails, reg.name, event.name, reg.phoneno);
   } catch {
     res.status(400).send("validation failed");
   }

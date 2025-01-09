@@ -1,4 +1,8 @@
 <h2> <%= event.name %> </h2>
+
+<button onclick="downloadCSV()"> Download CSV </button>
+<button onclick="downloadJSON()"> Download JSON </button>
+
 <table>
   <thead>
     <tr>
@@ -23,3 +27,29 @@
   <% }); %>
   </tbody>
 </table>
+
+<script>
+  function convertRow(x) {
+    const values = [];
+    x.querySelectorAll("td").forEach(a => values.push(a.innerText));
+    return values.join(", ") + "\n";
+  }
+
+  function downloadFile(content, filename) {
+    const file = new Blob(content, { type: "text/plain" });
+    const url = URL.createObjectURL(file);
+    const a = document.createElement("a");
+    a.href = url;
+    a.setAttribute("download", "<%= event.name %>".toLowerCase().replaceAll(" ", "_") + "." + filename);
+    a.click();
+  } 
+  function downloadCSV() {
+    const lines = [];
+    document.querySelector("table").querySelectorAll("tr").forEach(x => lines.push(convertRow(x)))
+    downloadFile(lines, "csv");
+  }
+
+  function downloadJSON() {
+    downloadFile([ "nai dunga lol" ], "json");
+  }
+</script>

@@ -34,6 +34,10 @@
   </select>
   <%- include("../../admin/fileUpload") %>
   <label for="imageURL"> Image URL </label>
-  <input name="imageURL" type="url" value="<%= event.imageURL %>" required>
+  <input name="imageURL" id="fileUploadTarget" type="url" value="<%= event.imageURL %>" required>
   <button type="submit"> Update Event </button>
 </form>
+
+<script>
+  const CLOUDINARY_BUCKETID = "<%= CLOUDINARY_BUCKETID %>";
+</script>

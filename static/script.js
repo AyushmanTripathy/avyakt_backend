@@ -11,20 +11,28 @@ if (fileUploadBtn && fileUploadInput && fileUploadTarget) {
     fileUploadBtn.disabled = true;
     fileUploadTarget.placeholder = "Uploading ...";
 
-    /*
-    const formData = new FormData();
-    formData.append("file", fileUploadInput.files[0]);
-    const res = await fetch("https://0x0.st", {
-      method: "POST",
-      headers: {
-        "Content-Type": "multipart/form-data"
-      },
-      body: formData
-    })
-    if (res.ok) console.log(await res.text());
-    */
-    fileUploadTarget.value = "https://placehold.co/600x600?text=Event+Pic";
+    fileUploadTarget.value = await uploadImageToCloudinary(fileUploadInput.files[0]);
   };
+}
+
+
+async function uploadImageToCloudinary(file) {
+  const url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_BUCKETID}/upload`;
+  const data = new FormData();
+  data.append('file', file);
+  data.append('upload_preset', 'example');
+
+  const fetched = await fetch(url, {
+    method: "post",
+    body: data,
+  });
+
+  if (fetched.ok) {
+    const parsed = await fetched.json()
+    return parsed.url;
+  }
+
+  return "";
 }
 
 //Update options with selected attribute

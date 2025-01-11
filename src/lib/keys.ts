@@ -12,6 +12,12 @@ if (!CLIENT_KEY) {
   process.exit(1);
 }
 
+const CLOUDINARY_BUCKETID = process.env.CLOUDINARY_BUCKETID;
+if (!CLOUDINARY_BUCKETID) {
+  console.error("CLOUDINARY_BUCKETID not present");
+  process.exit(1);
+}
+
 export function validateKey(req: Request) {
   if (!req.headers.cookie) return false;
   else if (req.headers.cookie.split(";").includes("key=" + ADMIN_KEY))
@@ -19,4 +25,4 @@ export function validateKey(req: Request) {
   else return false;
 }
 
-export { ADMIN_KEY, CLIENT_KEY };
+export { ADMIN_KEY, CLIENT_KEY, CLOUDINARY_BUCKETID };

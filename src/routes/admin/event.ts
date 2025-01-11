@@ -1,6 +1,7 @@
 import { Router } from "express";
 import Event from "../../model/Event";
 import Registration from "../../model/Registration";
+import { CLOUDINARY_BUCKETID } from "../../lib/keys";
 
 const router = Router();
 
@@ -19,6 +20,7 @@ router.get("/", async (req, res) => {
 router.get("/add", (req, res) => {
   res.render("admin/event/add", {
     message: "Fill the required info",
+    CLOUDINARY_BUCKETID,
   });
 });
 
@@ -41,6 +43,7 @@ router.post("/add", async (req, res) => {
   } catch (e) {
     res.status(400).render("admin/event/add", {
       message: "Operation Failed",
+      CLOUDINARY_BUCKETID,
     });
   }
 });
@@ -52,6 +55,7 @@ router.get("/update/:id", async (req, res) => {
     else
       res.render("admin/event/update", {
         message: "Change info & update",
+        CLOUDINARY_BUCKETID,
         event,
       });
   } catch (e) {
@@ -77,6 +81,7 @@ router.post("/update", async (req, res) => {
   } catch (e) {
     res.status(400).render("admin/event/update", {
       message: "Operation Failed",
+      CLOUDINARY_BUCKETID,
     });
   }
 });
@@ -84,9 +89,12 @@ router.post("/update", async (req, res) => {
 router.get("/registrations/:id", async (req, res) => {
   try {
     const event = await Event.findById(req.params.id, "name memberCount");
-    const registrations = await Registration.find({
-      eventId: req.params.id,
-    }, "phoneno upiId mails name").exec();
+    const registrations = await Registration.find(
+      {
+        eventId: req.params.id,
+      },
+      "phoneno upiId mails name"
+    ).exec();
     res.render("admin/event/registrations", { event, registrations });
   } catch (e) {
     res.status(404).send("id not found");

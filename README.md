@@ -20,5 +20,7 @@ for details about API endpoints, read the [docs](./docs/index.md).
 1. Login system
 1. API to query events and registrations, [docs](./docs/index.md)
 
+for running locally use `docker-compose up`  
+
 Developed by ❤️ by Vishnu Prasad korada & Ayushman Tripathy  
 Made for Avyakt 4.0 CSE Departmental Fest, check [here](https://github.com/Avyakt-4-0).

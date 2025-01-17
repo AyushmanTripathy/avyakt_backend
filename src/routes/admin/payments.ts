@@ -42,7 +42,6 @@ router.get("/all", async (req, res) => {
       {},
       "name phoneno upiId isVerified isValid"
     );
-    console.log(payments);
     res.render("admin/payments/all", { payments });
   } catch (e) {
     res.sendStatus(404);
